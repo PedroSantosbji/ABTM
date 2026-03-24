@@ -251,7 +251,7 @@ const TITLES = {
   overview:   ["Visão Geral",     "Guidance + Programa Feedback"],
   arquitetura:["Arquitetura",     "Sistemas e fluxos do produto"],
   ia:         ["IA & Automação",  "Funcionalidades de inteligência integradas"],
-  roadmap:    ["Roadmap",         "Cronograma de desenvolvimento · 10 meses"],
+  roadmap:    ["Roadmap",         "Cronograma de desenvolvimento · 8 meses"],
   escopo:     ["Escopo MVP",      "Funcionalidades por plataforma e perfil"],
 };
 
@@ -397,11 +397,9 @@ function Arquitetura() {
 function Overview() {
   return (
     <div className="pg">
-      <div className="stat-row">
+      <div className="stat-row" style={{ gridTemplateColumns: "repeat(2,1fr)" }}>
         {[
           { l:"Sistemas",        v:"3",          s:"Retaguarda · App · Portal" },
-          { l:"Prazo total",     v:"10 meses",   s:"Design + Dev + Migração" },
-          { l:"Horas c/ margem", v:"2.411h",     s:"25% margem de segurança" },
           { l:"Perfis de acesso",v:"7",           s:"AD · SU · ST · SM · SO · CL · PV" },
         ].map(s => (
           <div key={s.l} className="sc">
@@ -537,55 +535,47 @@ function IA() {
 
 /* ─── ROADMAP ─────────────────────────────────────────────────── */
 const PHASES = [
-  { id:0, label:"Fase 01", name:"Product Design",   months:"M1–M2",  dur:"2 meses",  color:"#7c3aed",
-    summary:"Designer Sênior full time — pesquisa, design system, protótipos e handoff antes do código.",
+  { id:0, label:"Fase 01", name:"Design + Fundação",  months:"M1–M2",  dur:"2 meses",  color:"#7c3aed",
+    summary:"Design e backend core em paralelo desde o M1 — Mobile entra no S2 (15 dias) com telas já disponíveis para ajustes e desenvolvimento simultâneo.",
     cols:[
-      {title:"UX Research",  items:["Mapeamento de jornadas por persona","Wireframes de baixa fidelidade","Validação com stakeholders","Fluxos críticos definidos"]},
-      {title:"UI Design",    items:["Design system e componentes","Protótipos navegáveis no Figma","Telas App (React Native)","Telas web Retaguarda e Portal"]},
-      {title:"Handoff",      items:["Documentação de specs","Assets e tokens exportados","Revisão de acessibilidade","Alinhamento técnico final"]},
+      {title:"UX/UI Design (M1–M2)",  items:["Mapeamento de jornadas por persona","Design system e componentes","Protótipos navegáveis no Figma","Telas App, Retaguarda e Portal","Handoff e specs para dev"]},
+      {title:"Backend Core (M1–M2)",  items:["Infra / DevOps (85h) — inicia M1","Auth + RBAC (60h)","CRUDs gerais (50h)","Notificações (40h)","Upload/imagens (26h)","Auditoria (21h)"]},
+      {title:"Retaguarda Admin (M2)", items:["Auth + permissões (40h)","CRUDs cadastros (50h)","Dashboard admin (40h)","Integração backend (34h)"]},
     ],
-    team:["Product Designer Sênior — M1–M2 (full time)"] },
-  { id:1, label:"Fase 02", name:"Fundação",          months:"M2–M4",  dur:"3 meses",  color:"#1e3a5f",
-    summary:"API, autenticação, integrações críticas, CRUDs base e Retaguarda Admin.",
+    team:["Product Designer Sênior — M1–M2 (full time)","Backend Sênior — M1–M6","Frontend Web Pleno — M1–M6","Mobile Sênior — S2 em diante (15 dias após início do design)"] },
+  { id:1, label:"Fase 02", name:"Integrações & App",  months:"M2–M4",  dur:"2 meses",  color:"#1e3a5f",
+    summary:"Integrações críticas e módulos base do App — Mobile já em ritmo pleno desde o S2 do M1.",
     cols:[
-      {title:"Backend Core",    items:["Auth + RBAC (60h)","CRUDs gerais (50h)","Notificações (40h)","Upload/imagens (26h)","Auditoria (21h)","API + testes (50h)"]},
-      {title:"Integrações",     items:["Tickets + Blip (75h)","Senior RH","Pipedrive contratos","Infra / DevOps (85h)"]},
-      {title:"Retaguarda Admin",items:["Auth + permissões (40h)","CRUDs cadastros (50h)","Dashboard admin (40h)","Integração backend (34h)"]},
+      {title:"Integrações (M2–M3)",   items:["Tickets + Blip (75h)","API + testes (50h)","Senior RH","Pipedrive contratos"]},
+      {title:"App Promotor (S2–M4)",  items:["Auth + Dashboard (115h)","Calendário + Jornada (64h)","Check-in + Ponto (72h)","Diagnóstico + Checklist (67h)"]},
+      {title:"Retaguarda Sup. (M3–M4)",items:["Dashboard + KPIs (65h)","Atendimentos (40h)","Promotores (25h)","Tickets (40h)","Notificações (20h)"]},
     ],
-    team:["Backend Sênior — M2–M7","Frontend Web Pleno — M2–M7"] },
-  { id:2, label:"Fase 03", name:"App & Supervisor",  months:"M4–M6",  dur:"2 meses",  color:"#166534",
-    summary:"App do promotor completo, Retaguarda Supervisor e automações de IA.",
+    team:["Backend Sênior — M1–M6","Mobile Sênior — S2 (M1) em diante","Frontend Web Pleno — M1–M6"] },
+  { id:2, label:"Fase 03", name:"App Avançado & IA",  months:"M4–M6",  dur:"2 meses",  color:"#166534",
+    summary:"Módulos avançados do App, automações de IA e Portal do Cliente em desenvolvimento paralelo.",
     cols:[
-      {title:"App Promotor",    items:["Auth + Dashboard (115h)","Calendário + Jornada (64h)","Check-in + Ponto (72h)","Diagnóstico + Checklist (67h)","Reposição (115h)","Live map (114h)"]},
-      {title:"Retaguarda Sup.", items:["Dashboard + KPIs (65h)","Atendimentos (40h)","Promotores (25h)","Tickets (40h)","Notificações (20h)"]},
-      {title:"IA",              items:["Voice-to-Text no App","Alertas automáticos","Resumos automáticos","Roteirização automática","KPIs promotores (35h)"]},
+      {title:"App Avançado (M4–M5)",  items:["Reposição por corredor (115h)","Live map + localização (114h)","Push notifications","Voice-to-Text (IA)","Atividades e campanhas"]},
+      {title:"IA & KPIs (M4–M5)",     items:["Alertas automáticos","Resumos automáticos (SO)","Roteirização automática","KPIs promotores (35h)"]},
+      {title:"Portal Cliente (M5–M6)",items:["Auth + permissões (40h)","Dashboard operacional (32h)","Book de fotos (52h)","Tickets + Blip (37h)","Alertas e relatórios automáticos"]},
     ],
-    team:["Backend Sênior — M2–M7","Mobile Sênior — M4–M7","Frontend Web Pleno — M2–M7"] },
-  { id:3, label:"Fase 04", name:"Portal & QA",       months:"M6–M8",  dur:"2 meses",  color:"#d97706",
-    summary:"Portal do cliente completo, testes end-to-end e preparação para go-live.",
+    team:["Backend Sênior — M1–M6","Mobile Sênior — S2 (M1) em diante","Frontend Web Pleno — M1–M6"] },
+  { id:3, label:"Fase 04", name:"QA, Migração & Go-live", months:"M6–M8", dur:"2 meses", color:"#d97706",
+    summary:"QA completo e migração em paralelo ao refinamento final — go-live assistido no M8.",
     cols:[
-      {title:"Portal Cliente",items:["Auth + permissões (40h)","Dashboard operacional (32h)","Book de fotos (52h)","Tickets + Blip (37h)","Alertas proativos","Relatórios automáticos"]},
-      {title:"QA & Testes",   items:["Testes end-to-end","Teste de carga","Validação offline do app","Correções e ajustes"]},
-      {title:"Go-live",       items:["Configuração de produção","Monitoramento e alertas","Documentação técnica","Treinamento das equipes"]},
+      {title:"QA & Testes (M6–M7)",   items:["Testes end-to-end","Teste de carga e performance","Validação offline do app","Correções e ajustes","Revisão de segurança"]},
+      {title:"Migração (M6–M8)",      items:["Inventário e mapeamento de dados legados","Scripts de migração incremental","Validação paralela (dual-run)","Auditoria pós-migração","Encerramento do legado"]},
+      {title:"Go-live (M7–M8)",       items:["Configuração de produção","Treinamento usuários-chave","Monitoramento e alertas","Documentação técnica","Suporte pós go-live"]},
     ],
-    team:["Backend Sênior — M2–M7","Mobile Sênior — M4–M7","Frontend Web Pleno — M2–M7"] },
-  { id:4, label:"Fase 05", name:"Migração",          months:"M9–M10", dur:"2 meses",  color:"#52524e",
-    summary:"Migração estruturada do sistema legado com validação em paralelo e go-live assistido.",
-    cols:[
-      {title:"Mapeamento",  items:["Inventário de dados legados","Mapeamento de entidades","Regras de transformação","Validação de integridade"]},
-      {title:"Execução",    items:["Scripts de migração","Carga incremental","Validação paralela (dual-run)","Auditoria pós-migração"]},
-      {title:"Handover",    items:["Treinamento usuários-chave","Documentação de processos","Suporte pós go-live","Encerramento do legado"]},
-    ],
-    team:["Backend Sênior — M9–M10","Full Stack Pleno — M9–M10 (apoio)"] },
+    team:["Backend Sênior — M6–M8","Mobile Sênior — M6–M7","Frontend Web Pleno — M6–M7","QA — M6–M8"] },
 ];
 
 const BARS = [
-  { label:"Design",   start:0, span:2, color:"#7c3aed" },
-  { label:"Backend",  start:1, span:6, color:"#1e3a5f" },
-  { label:"Frontend", start:1, span:6, color:"#2563eb" },
-  { label:"Mobile",   start:3, span:4, color:"#166534" },
-  { label:"Portal",   start:5, span:3, color:"#d97706" },
-  { label:"Migração", start:8, span:2, color:"#71717a" },
+  { label:"Design",   start:0,  span:4,  color:"#7c3aed" },
+  { label:"Backend",  start:0,  span:12, color:"#1e3a5f" },
+  { label:"Frontend", start:0,  span:12, color:"#2563eb" },
+  { label:"Mobile",   start:1,  span:11, color:"#166534" },
+  { label:"Portal",   start:8,  span:4,  color:"#d97706" },
+  { label:"Migração", start:10, span:6,  color:"#71717a" },
 ];
 
 function Roadmap() {
@@ -594,20 +584,28 @@ function Roadmap() {
   return (
     <div className="pg">
       <div className="card">
-        <div className="ch"><span className="ch-t">Cronograma · 10 meses</span></div>
+        <div className="ch"><span className="ch-t">Cronograma · 8 meses</span></div>
         {/* Gantt */}
         <div style={{ padding: "14px 16px" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "80px repeat(10,1fr)", marginBottom: 4 }}>
+          {/* Month labels — 8 months, each spanning 2 sprint columns */}
+          <div style={{ display: "grid", gridTemplateColumns: "80px repeat(16,1fr)", marginBottom: 2 }}>
             <div />
-            {Array.from({ length: 10 }, (_, i) => (
-              <div key={i} style={{ textAlign: "center", fontSize: 10, fontFamily: "var(--mono)", color: "var(--t3)", padding: "3px 2px", borderRight: i < 9 ? "1px solid var(--bd)" : "none" }}>M{i+1}</div>
+            {Array.from({ length: 8 }, (_, m) => (
+              <div key={m} style={{ gridColumn: `span 2`, textAlign: "center", fontSize: 10, fontFamily: "var(--mono)", color: "var(--t3)", padding: "2px 2px", borderRight: m < 7 ? "1px solid var(--bd)" : "none" }}>M{m+1}</div>
+            ))}
+          </div>
+          {/* Sprint tick marks */}
+          <div style={{ display: "grid", gridTemplateColumns: "80px repeat(16,1fr)", marginBottom: 4 }}>
+            <div />
+            {Array.from({ length: 16 }, (_, i) => (
+              <div key={i} style={{ textAlign: "center", fontSize: 9, fontFamily: "var(--mono)", color: "var(--t4)", padding: "1px 0", borderRight: i < 15 ? "1px dashed var(--bd)" : "none" }}>S{i+1}</div>
             ))}
           </div>
           {BARS.map(b => (
-            <div key={b.label} style={{ display: "grid", gridTemplateColumns: "80px repeat(10,1fr)", marginBottom: 2, alignItems: "center" }}>
+            <div key={b.label} style={{ display: "grid", gridTemplateColumns: "80px repeat(16,1fr)", marginBottom: 2, alignItems: "center" }}>
               <div style={{ fontSize: 11, color: "var(--t3)", fontWeight: 500, paddingRight: 8, textAlign: "right" }}>{b.label}</div>
-              {Array.from({ length: 10 }, (_, i) => (
-                <div key={i} style={{ height: 20, borderRight: i < 9 ? "1px solid var(--bd)" : "none", padding: "2px 1px" }}>
+              {Array.from({ length: 16 }, (_, i) => (
+                <div key={i} style={{ height: 20, borderRight: i < 15 ? "1px dashed var(--bd)" : "none", padding: "2px 1px" }}>
                   {i >= b.start && i < b.start + b.span && (
                     <div style={{ height: "100%", borderRadius: 2, background: b.color, opacity: .82 }} />
                   )}
@@ -776,7 +774,7 @@ function Estimativa() {
           {l:"Horas sem margem",  v:"1.929h",    s:"Soma de todos os sistemas"},
           {l:"Margem segurança",  v:"+482h",      s:"25% sobre o total"},
           {l:"Total com margem",  v:"2.411h",     s:"Estimativa final recomendada"},
-          {l:"Prazo total",       v:"10 meses",   s:"2m design + 6m dev + 2m migração"},
+          {l:"Prazo total",       v:"8 meses",   s:"Design paralelo + 6m dev + migração M6–M8"},
         ].map(s => (
           <div key={s.l} className="sc"><div className="sc-l">{s.l}</div><div className="sc-v">{s.v}</div><div className="sc-s">{s.s}</div></div>
         ))}
@@ -825,10 +823,10 @@ function Estimativa() {
               {l:"Horas base",    v:`${GRAND}h`},
               {l:"Margem 25%",   v:`+${GRAND_MARGIN - GRAND}h`},
               {l:"Total",        v:`${GRAND_MARGIN}h`, bold:true},
-              {l:"Design Sênior",v:"2 meses"},
+              {l:"Design Sênior",v:"2 meses (paralelo ao dev)"},
               {l:"Dev (equipe)", v:"6 meses"},
-              {l:"Migração",     v:"2 meses"},
-              {l:"Prazo total",  v:"10 meses", bold:true},
+              {l:"Migração",     v:"M6–M8 (paralela ao QA)"},
+              {l:"Prazo total",  v:"8 meses", bold:true},
             ].map(r => (
               <div key={r.l} style={{ display: "flex", justifyContent: "space-between", padding: "7px 14px", borderBottom: "1px solid var(--bd)", fontSize: 12 }}>
                 <span style={{ color: "var(--t2)" }}>{r.l}</span>
@@ -856,7 +854,7 @@ function Proximos() {
               ["02","Aprovação e assinatura","Contrato com cronograma de entregas, marcos e SLA de suporte.", "1 semana"],
               ["03","Kick-off com designer", "Início do Product Design — pesquisa, wireframes e design system.","Semana 3"],
               ["04","Início do desenvolvimento","Backend e frontend web em paralelo ao final do M1.",          "Mês 2"],
-              ["05","Planejamento da migração","Mapeamento de dados legados para execução nos meses 9–10.",    "Mês 6"],
+              ["05","Planejamento da migração","Mapeamento de dados legados para execução em paralelo nos M6–M8.",    "Mês 5"],
             ].map(r => (
               <tr key={r[0]}>
                 <td><span style={{ fontFamily: "var(--mono)", fontSize: 11, color: "var(--t4)" }}>{r[0]}</span></td>
@@ -873,13 +871,13 @@ function Proximos() {
           <div className="ch"><span className="ch-t">Resumo da proposta</span></div>
           {[
             ["Sistemas",        "Retaguarda · App do Promotor · Portal do Cliente"],
-            ["Prazo total",     "10 meses (design + desenvolvimento + migração)"],
+            ["Prazo total",     "8 meses (design + desenvolvimento + migração paralela)"],
             ["Horas c/ margem", "2.411h (25% margem de segurança)"],
             ["IA no produto",   "Voice-to-Text · Alertas · Resumos · Roteirização"],
             ["Diferenciais",    "Blip · Pipedrive · Portal do Cliente · Offline-First"],
             ["Perfis",          "Admin · Supervisor · ST · SM · SO · Cliente · Promotor"],
             ["App",             "React Native · Offline-First · Sync automático"],
-            ["Migração",        "2 meses ao final — validação em paralelo com legado"],
+            ["Migração",        "Paralela ao QA nos M6–M8 — validação em dual-run"],
           ].map(r => (
             <div key={r[0]} style={{ display: "flex", gap: 12, padding: "8px 14px", borderBottom: "1px solid var(--bd)" }}>
               <div style={{ fontSize: 11.5, fontWeight: 500, color: "var(--t3)", minWidth: 120, flexShrink: 0 }}>{r[0]}</div>
@@ -908,8 +906,84 @@ const PAGES = {
   roadmap: Roadmap,   escopo: Escopo,
 };
 
+function Login({ onAuth }) {
+  const [pw, setPw] = useState("");
+  const [err, setErr] = useState(false);
+  const [shake, setShake] = useState(false);
+
+  const attempt = () => {
+    if (pw === "abtm_e_guidance") {
+      onAuth();
+    } else {
+      setErr(true);
+      setShake(true);
+      setTimeout(() => setShake(false), 400);
+    }
+  };
+
+  return (
+    <div style={{ fontFamily: "var(--font)" }}>
+      <div style={{
+        background: "var(--sf)", border: "1px solid var(--bd)", borderRadius: 10,
+        padding: "32px 28px", width: 320,
+        animation: shake ? "shake .4s ease" : undefined,
+      }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 24 }}>
+          <div style={{ width: 32, height: 32, borderRadius: 7, background: "var(--t)", display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", fontWeight: 700, fontSize: 14 }}>G</div>
+          <div>
+            <div style={{ fontWeight: 600, fontSize: 14, letterSpacing: "-.02em" }}>Guidance</div>
+            <div style={{ fontSize: 11, color: "var(--t3)", fontFamily: "var(--mono)" }}>Proposta Comercial · MVP</div>
+          </div>
+        </div>
+        <div style={{ fontSize: 12.5, color: "var(--t2)", marginBottom: 16, lineHeight: 1.6 }}>
+          Documento confidencial. Insira a senha de acesso para continuar.
+        </div>
+        <div style={{ marginBottom: 12 }}>
+          <input
+            type="password"
+            value={pw}
+            onChange={e => { setPw(e.target.value); setErr(false); }}
+            onKeyDown={e => e.key === "Enter" && attempt()}
+            placeholder="Senha de acesso"
+            style={{
+              width: "100%", padding: "9px 12px", borderRadius: 6, fontSize: 13,
+              border: `1px solid ${err ? "#f87171" : "var(--bd)"}`,
+              outline: "none", fontFamily: "var(--font)", background: err ? "#fef2f2" : "var(--sf)",
+              color: "var(--t)",
+            }}
+          />
+          {err && <div style={{ fontSize: 11.5, color: "#dc2626", marginTop: 6 }}>Senha incorreta. Tente novamente.</div>}
+        </div>
+        <button
+          onClick={attempt}
+          style={{
+            width: "100%", padding: "9px", borderRadius: 6, border: "none",
+            background: "var(--t)", color: "#fff", fontFamily: "var(--font)",
+            fontSize: 13, fontWeight: 500, cursor: "pointer",
+          }}
+        >
+          Acessar →
+        </button>
+        <div style={{ marginTop: 18, fontSize: 11, color: "var(--t4)", textAlign: "center", fontFamily: "var(--mono)" }}>
+          © 2025 Guidance · Versão 2.0
+        </div>
+      </div>
+      <style>{`@keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}`}</style>
+    </div>
+  );
+}
+
 export default function App() {
+  const [auth, setAuth] = useState(false);
   const [active, setActive] = useState("overview");
+
+  if (!auth) return (
+    <div className="root" style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <style>{S}</style>
+      <Login onAuth={() => setAuth(true)} />
+    </div>
+  );
+
   const Page = PAGES[active];
   const [title, sub] = TITLES[active];
 
