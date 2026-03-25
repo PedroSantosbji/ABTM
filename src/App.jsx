@@ -622,7 +622,12 @@ function IA() {
               use:["Observações de diagnóstico do PDV","Registro de rupturas identificadas","Notas durante a reposição","Comunicação rápida com supervisor"] },
             { name:"Análise Automática de Fotos", where:"App · Retaguarda",       badge:"p",  month:"M1–M6",
               desc:"O sistema analisa automaticamente as fotos capturadas pelo promotor no PDV, identificando problemas de exposição, rupturas e desvios de planograma sem intervenção manual.",
-              use:["Detecção de ruptura por imagem","Análise de posicionamento de produto","Conformidade com planograma","Alertas visuais automáticos para o supervisor"] },
+              use:["Detecção de ruptura por imagem","Análise de posicionamento de produto","Conformidade com planograma","Alertas visuais automáticos para o supervisor"],
+              milestones:[
+                { m:"M2", label:"Funcional", desc:"Modelo treinado e operando em ambiente de desenvolvimento", color:"#2563eb" },
+                { m:"M4", label:"Homologada", desc:"Validada com dados reais e aprovada pela equipe de negócio", color:"#d97706" },
+                { m:"M6", label:"Produtizada", desc:"Integrada ao produto, em produção para todos os usuários", color:"#16a34a" },
+              ] },
             { name:"Sugestão de Pedido",          where:"App Promotor",           badge:"cy", month:"M5–M7",
               desc:"Com base no histórico de vendas, ruptura identificada e nível de estoque, o sistema sugere automaticamente os produtos e quantidades a repor em cada PDV.",
               use:["Sugestão por corredor e categoria","Baseada em histórico e sazonalidade","Redução de rupturas por falta de pedido","Aprovação rápida pelo promotor"] },
@@ -637,6 +642,23 @@ function IA() {
               </div>
               <div style={{ marginBottom:10 }}><span className={`badge ${c.badge}`}>{c.where}</span></div>
               <p style={{ fontSize:12, color:"var(--t3)", lineHeight:1.65, marginBottom:10 }}>{c.desc}</p>
+              {c.milestones && (
+                <div style={{ marginBottom:12 }}>
+                  <div style={{ fontSize:9, fontWeight:700, color:"var(--t3)", textTransform:"uppercase", letterSpacing:".07em", marginBottom:8, fontFamily:"var(--mono)" }}>Marcos de entrega</div>
+                  <div style={{ display:"flex", gap:6 }}>
+                    {c.milestones.map(mk => (
+                      <div key={mk.m} style={{ flex:1, border:`1.5px solid ${mk.color}33`, borderRadius:8, padding:"8px 10px", background:mk.color+"08" }}>
+                        <div style={{ display:"flex", alignItems:"center", gap:5, marginBottom:3 }}>
+                          <div style={{ width:6, height:6, borderRadius:"50%", background:mk.color, flexShrink:0 }} />
+                          <span style={{ fontSize:10, fontWeight:700, fontFamily:"var(--mono)", color:mk.color }}>{mk.m}</span>
+                        </div>
+                        <div style={{ fontSize:11, fontWeight:700, color:"var(--t)", marginBottom:2 }}>{mk.label}</div>
+                        <div style={{ fontSize:10, color:"var(--t3)", lineHeight:1.45 }}>{mk.desc}</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
               <div className="sec-lbl" style={{ marginBottom:6, fontSize:9 }}>Casos de uso</div>
               {c.use.map(u => (
                 <div key={u} style={{ fontSize:12, color:"var(--t2)", display:"flex", gap:5, padding:"3px 0" }}>
@@ -831,6 +853,10 @@ function Equipe() {
       ded:"Full time M1–M8",
       segs:[{s:1,e:8,ft:true}],
       resp:["Análise automática de fotos (M1–M6)","Assistente de Voz · speech-to-text (M4)","Sugestão de pedido (M5–M7)","Resumo inteligente (M7) · Sustentação M8"] },
+    { role:"Engenheiro de Dados / Backend", init:"ED", color:"#0f766e", bg:"#f0fdfa",
+      ded:"Full time M1–M3",
+      segs:[{s:1,e:3,ft:true}],
+      resp:["Estruturação do pipeline de dados","Modelagem e enriquecimento da base","Integração com os modelos de IA","Fundação de dados para análise de fotos"] },
     { role:"QA / Testes", init:"QA", color:"#b45309", bg:"#fffbeb",
       ded:"Full time M4–M6",
       segs:[{s:4,e:6,ft:true}],
@@ -852,7 +878,7 @@ function Equipe() {
     <div className="pg">
       <div className="stat-row">
         {[
-          { l:"Pessoas no time",  v:"6",       s:"Papéis distintos e complementares", acc:"#1e3a5f" },
+          { l:"Pessoas no time",  v:"7",       s:"Papéis distintos e complementares", acc:"#1e3a5f" },
           { l:"Período",          v:"8 meses",  s:"M1–M6 dev/homolog · M7–M8 IA",      acc:"#7c3aed" },
           { l:"IA embarcada",     v:"M1–M8",   s:"Cientista de dados full time",       acc:"#0891b2" },
           { l:"Go-live",          v:"M6",      s:"Sistemas em produção · IA continua", acc:"#16a34a" },
