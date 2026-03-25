@@ -20,7 +20,7 @@ const SYSTEMS = [
       { label:"Sup. Treinamento", color:"#1e3a5f", sections:[
         {title:"Operação",    items:["Dashboard com KPIs da equipe","Atendimentos: alocação e status","Monitoramento de promotores","Mapa ao vivo da equipe","Histórico de visitas"]},
         {title:"Treinamento", items:["Campanhas de capacitação dos promotores","Acompanhamento individual em campo","Certificações e progresso","Feedback e plano de desenvolvimento"]},
-        {title:"Automação",   items:["Alertas inteligentes","Resumos automáticos (IA)","Notificações em tempo real"]},
+        {title:"Automação",   items:["Alertas inteligentes","Resumo inteligente de atendimento (IA)","Notificações em tempo real"]},
         {title:"Comunicação", items:["Tickets e solicitações","Chat com promotores","Avisos e comunicados"]},
       ]},
       { label:"S. Merchandising", color:"#581c87", sections:[
@@ -29,7 +29,7 @@ const SYSTEMS = [
       ]},
       { label:"S. Operacional", color:"#166534", sections:[
         {title:"Desvios",  items:["Central de desvios e exceções","Validação de check-ins fora do raio","Gestão de justificativas","Histórico de ocorrências"]},
-        {title:"Operação", items:["Resumos automáticos (IA)","Pendências do dia","Relatório de presença"]},
+        {title:"Operação", items:["Resumo inteligente de atendimento (IA)","Pendências do dia","Relatório de presença"]},
       ]},
     ],
   },
@@ -85,7 +85,9 @@ const ESCOPO = {
     {f:"S. Treinamento: Alertas inteligentes",tag:"inc",obs:"Monitoramento"},
     {f:"SM: Monitoramento de execução em gôndola",tag:"inc",obs:"—"},
     {f:"SO: Central de desvios e exceções",tag:"inc",obs:"—"},
-    {f:"SO: Resumos automáticos (IA)",tag:"inc",obs:"Automação"},
+    {f:"Resumo inteligente de atendimento",tag:"inc",obs:"M7",ia:true},
+    {f:"Análise automática de fotos (PDV)",tag:"inc",obs:"M1–M6",ia:true},
+    {f:"Sugestão de pedido",tag:"inc",obs:"M5–M7",ia:true},
   ],
   portal:[
     {f:"Auth + permissões (perfil Cliente)",tag:"inc",obs:"—"},
@@ -94,7 +96,8 @@ const ESCOPO = {
     {f:"Tickets e solicitações",tag:"inc",obs:"—"},
     {f:"Alertas proativos de ruptura/vencimento",tag:"inc",obs:"—"},
     {f:"Relatórios por atendimento",tag:"inc",obs:"—"},
-    {f:"Notificações ao cliente",tag:"fut",obs:"Fase 2"},
+    {f:"Sugestão de pedido",tag:"inc",obs:"M5–M7",ia:true},
+    {f:"Resumo inteligente de atendimento",tag:"inc",obs:"M7",ia:true},
   ],
   app:[
     {f:"Auth/login",tag:"inc",obs:"—"},
@@ -113,7 +116,8 @@ const ESCOPO = {
     {f:"Diagnóstico do PDV (fotos antes)",tag:"inc",obs:"Por setor"},
     {f:"Reposição por corredor (fotos evidência)",tag:"inc",obs:"—"},
     {f:"Localização + live map",tag:"inc",obs:"Real-time"},
-    {f:"Assistente de Voz (IA)",tag:"inc",obs:"Pronto no M4"},
+    {f:"Análise automática de fotos",tag:"inc",obs:"M1–M6",ia:true},
+    {f:"Assistente de Voz",tag:"inc",obs:"M4",ia:true},
     {f:"Offline-first + sync automático",tag:"inc",obs:"Sem internet"},
   ],
 };
@@ -145,8 +149,7 @@ const RM_GROUPS = [
       { name:"S. Treinamento: Treinamento de promotores", s:3, e:3, type:"feature" },
       { name:"S. Merchandising: Gôndola e execução",  s:3, e:4, type:"feature" },
       { name:"S. Operacional: Central de desvios",    s:3, e:4, type:"feature" },
-      { name:"Alertas Inteligentes",               s:2, e:3, type:"feature" },
-      { name:"IA · Resumos Automáticos",              s:3, e:4, type:"ia"      },
+      { name:"Alertas Inteligentes",                  s:2, e:3, type:"feature" },
     ],
   },
   {
@@ -381,7 +384,7 @@ const NAV = [
   { section:"Entrega", items:[
     {id:"roadmap",     ic:"◷", label:"Roadmap"},
     {id:"equipe",      ic:"◈", label:"Equipe"},
-    {id:"escopo",      ic:"☑", label:"Escopo MVP"},
+    {id:"escopo",      ic:"☑", label:"Escopo"},
   ]},
 ];
 
@@ -391,7 +394,7 @@ const TITLES = {
   ia:         ["IA & Automação", "Inteligência integrada ao produto"],
   roadmap:    ["Roadmap",        "Feature por feature · 4 meses de desenvolvimento + 2 meses de migração"],
   equipe:     ["Equipe",         "Composição do time e dedicação por mês"],
-  escopo:     ["Escopo MVP",     "Funcionalidades por plataforma e perfil"],
+  escopo:     ["Escopo",          "Funcionalidades por plataforma e perfil"],
 };
 
 /* ─── SYSTEM BOX ──────────────────────────────────────────────── */
@@ -516,7 +519,7 @@ function Overview() {
           <div className="ch"><span className="ch-t">Ecossistema de Sistemas</span></div>
           {[
             { init:"RT", bg:"#eff6ff", tc:"#1e3a5f", name:"Retaguarda", sub:"Web · 4 perfis",
-              items:["Dashboard por perfil de acesso","Cadastros e configurações (Admin)","Atendimentos e roteiros (S. Treinamento)","Treinamento de promotores (S. Treinamento)","Execução e gôndola (S. Merchandising)","Desvios e exceções (S. Operacional)","Alertas inteligentes · Resumos automáticos (IA)"] },
+              items:["Dashboard por perfil de acesso","Cadastros e configurações (Admin)","Atendimentos e roteiros (S. Treinamento)","Treinamento de promotores (S. Treinamento)","Execução e gôndola (S. Merchandising)","Desvios e exceções (S. Operacional)","Alertas inteligentes · Resumo inteligente (IA)"] },
             { init:"PC", bg:"#fef9c3", tc:"#92400e", name:"Portal do Cliente", sub:"Web · Indústria",
               items:["Visão operacional do dia","Book fotográfico antes/depois","Alertas proativos de ruptura","Tickets e solicitações","Relatórios por atendimento"] },
             { init:"AP", bg:"#f0fdf4", tc:"#166534", name:"App do Promotor", sub:"React Native · Offline-First",
@@ -613,7 +616,7 @@ function IA() {
         </div>
       </div>
       <div className="card">
-        <div className="ch"><span className="ch-t">Funcionalidades de IA · MVP</span></div>
+        <div className="ch"><span className="ch-t">Funcionalidades de IA</span></div>
         <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"1px", background:"var(--bd)" }}>
           {[
             { name:"Assistente de Voz",          where:"App Promotor",           badge:"cy", month:"M4",
@@ -627,7 +630,7 @@ function IA() {
                 { m:"M4", label:"Homologada", desc:"Validada com dados reais e aprovada pela equipe de negócio", color:"#d97706" },
                 { m:"M6", label:"Produtizada", desc:"Integrada ao produto, em produção para todos os usuários", color:"#16a34a" },
               ] },
-            { name:"Sugestão de Pedido",          where:"App Promotor",           badge:"cy", month:"M5–M7",
+            { name:"Sugestão de Pedido",          where:"App · Portal do Cliente",       badge:"cy", month:"M5–M7",
               desc:"Com base no histórico de vendas, ruptura identificada e nível de estoque, o sistema sugere automaticamente os produtos e quantidades a repor em cada PDV.",
               use:["Sugestão por corredor e categoria","Baseada em histórico e sazonalidade","Redução de rupturas por falta de pedido","Aprovação rápida pelo promotor"] },
             { name:"Resumo Inteligente",          where:"Retaguarda · SO + Portal",badge:"p", month:"M7",
@@ -695,7 +698,6 @@ function FeatureBar({ color, s, e, type, months }) {
           <div className="ft-name-inner">
             <span className="ft-icon">{TYPE_META[type]?.icon}</span>
             <span className="ft-label">{months}</span>
-            {type === "ia" && <span className="ft-ia-badge">IA</span>}
           </div>
         </div>
       </td>
@@ -725,17 +727,41 @@ function FeatureBar({ color, s, e, type, months }) {
 
 function Roadmap() {
   const MILESTONES = [
-    { m:"M4",    label:"Dev completo · App + Retaguarda", desc:"Todas as features desenvolvidas e prontas para QA", color:"#166534" },
-    { m:"M5–M6", label:"Homologação + Migração",          desc:"QA de todos os sistemas + migração do Prime concluída", color:"#d97706" },
-    { m:"M6",    label:"Go-live",                         desc:"Todos os sistemas em produção", color:"#16a34a" },
-    { m:"M7–M8", label:"IA Avançada + Sustentação",       desc:"Sugestão de pedido, resumo inteligente, ajustes finais", color:"#7c3aed" },
+    { m:"M5",    label:"Dev completo",           desc:"Todas as features desenvolvidas e prontas para QA", color:"#166534" },
+    { m:"M5–M7", label:"Homologação + Migração", desc:"QA de todos os sistemas + migração do Prime concluída", color:"#d97706" },
+    { m:"M7",    label:"Go-live",                desc:"Todos os sistemas em produção", color:"#16a34a" },
+    { m:"M7–M8", label:"IA Avançada + Sustentação", desc:"Sugestão de pedido, resumo inteligente, ajustes finais", color:"#7c3aed" },
   ];
 
   return (
     <div className="pg">
+
+      {/* Milestones — topo da página */}
+      <div>
+        <div style={{ display:"flex", alignItems:"center", gap:10, marginBottom:12 }}>
+          <div style={{ width:4, height:20, borderRadius:2, background:"var(--blm)" }} />
+          <div style={{ fontSize:14, fontWeight:700, color:"var(--t)", letterSpacing:"-.01em" }}>Marcos de Entrega</div>
+        </div>
+        <div style={{ display:"grid", gridTemplateColumns:"repeat(4,1fr)", gap:12 }}>
+          {MILESTONES.map(mk => (
+            <div key={mk.m} className="card">
+              <div style={{ height:3, background:mk.color }} />
+              <div style={{ padding:"12px 14px" }}>
+                <div style={{ display:"flex", alignItems:"center", gap:7, marginBottom:6 }}>
+                  <div style={{ width:8, height:8, border:`2px solid ${mk.color}`, transform:"rotate(45deg)", borderRadius:1, flexShrink:0 }} />
+                  <div style={{ fontSize:10, fontFamily:"var(--mono)", fontWeight:700, color:mk.color }}>{mk.m}</div>
+                </div>
+                <div style={{ fontSize:12.5, fontWeight:700, color:"var(--t)", marginBottom:4, lineHeight:1.3 }}>{mk.label}</div>
+                <div style={{ fontSize:11.5, color:"var(--t3)", lineHeight:1.5 }}>{mk.desc}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
       {/* Legend */}
       <div className="card">
-        <div className="ch"><span className="ch-t">Legenda</span><span className="ch-s">8 meses · dev M1–M4 · homolog+migração M5–M6 · IA avançada M7–M8</span></div>
+        <div className="ch"><span className="ch-t">Legenda</span><span className="ch-s">8 meses · dev M1–M5 · homolog+migração M5–M7 · IA avançada M7–M8</span></div>
         <div style={{ padding:"12px 16px", display:"flex", gap:20, flexWrap:"wrap", alignItems:"center" }}>
           {[
             { color:"#1e3a5f", label:"Retaguarda" },
@@ -807,46 +833,29 @@ function Roadmap() {
           </tbody>
         </table>
       </div>
-
-      {/* Milestones */}
-      <div style={{ display:"grid", gridTemplateColumns:"repeat(4,1fr)", gap:12 }}>
-        {MILESTONES.map(mk => (
-          <div key={mk.m} className="card">
-            <div style={{ height:3, background:mk.color }} />
-            <div style={{ padding:"12px 14px" }}>
-              <div style={{ display:"flex", alignItems:"center", gap:7, marginBottom:6 }}>
-                <div style={{ width:8, height:8, border:`2px solid ${mk.color}`, transform:"rotate(45deg)", borderRadius:1, flexShrink:0 }} />
-                <div style={{ fontSize:10, fontFamily:"var(--mono)", fontWeight:700, color:mk.color }}>{mk.m}</div>
-              </div>
-              <div style={{ fontSize:12.5, fontWeight:700, color:"var(--t)", marginBottom:4, lineHeight:1.3 }}>{mk.label}</div>
-              <div style={{ fontSize:11.5, color:"var(--t3)", lineHeight:1.5 }}>{mk.desc}</div>
-            </div>
-          </div>
-        ))}
-      </div>
     </div>
   );
 }
 
 /* ─── EQUIPE ──────────────────────────────────────────────────── */
 function Equipe() {
-  const TOTAL_M = 6;
+  const TOTAL_M = 8;
   const TEAM = [
     { role:"Product Designer Sênior", init:"DS", color:"#7c3aed", bg:"#f5f3ff",
-      ded:"Full time M1–M3 · Part time M4–M6",
-      segs:[{s:1,e:3,ft:true},{s:4,e:6,ft:false}],
+      ded:"Full time M1 · Part time M2–M7",
+      segs:[{s:1,e:1,ft:true},{s:2,e:7,ft:false}],
       resp:["Design system e componentes","Wireframes e protótipos Figma","Telas App (React Native)","Telas web Retaguarda e Portal","Handoff técnico para devs"] },
     { role:"Backend Sênior", init:"BE", color:"#1e3a5f", bg:"#eff6ff",
-      ded:"Full time M1–M4 · Part time M5–M6",
-      segs:[{s:1,e:4,ft:true},{s:5,e:6,ft:false}],
+      ded:"Full time M1–M5 · Part time M6–M7",
+      segs:[{s:1,e:5,ft:true},{s:6,e:7,ft:false}],
       resp:["Auth + RBAC + APIs","Integrações externas","Infra / DevOps","Suporte à migração M5–M6"] },
     { role:"Frontend Web Pleno", init:"FE", color:"#2563eb", bg:"#eff6ff",
-      ded:"Full time M1–M4 · Part time M5–M6",
-      segs:[{s:1,e:4,ft:true},{s:5,e:6,ft:false}],
+      ded:"Full time M1–M5 · Part time M6–M7",
+      segs:[{s:1,e:5,ft:true},{s:6,e:7,ft:false}],
       resp:["Retaguarda — todos os perfis","Portal do Cliente","Dashboard e relatórios","Integração com APIs"] },
     { role:"Mobile Sênior", init:"MB", color:"#166534", bg:"#f0fdf4",
-      ded:"Full time M1–M4 · Part time M5–M6",
-      segs:[{s:1,e:4,ft:true},{s:5,e:6,ft:false}],
+      ded:"Full time M1–M5 · Part time M6–M7",
+      segs:[{s:1,e:5,ft:true},{s:6,e:7,ft:false}],
       resp:["App do Promotor (React Native)","Offline-first + Sync","Geolocalização + Live Map","Push Notifications"] },
     { role:"Cientista de Dados Sênior", init:"CD", color:"#0891b2", bg:"#ecfeff",
       ded:"Full time M1–M8",
@@ -857,8 +866,8 @@ function Equipe() {
       segs:[{s:3,e:6,ft:true}],
       resp:["Migração dos dados do Prime (M3–M6)"] },
     { role:"QA / Testes", init:"QA", color:"#b45309", bg:"#fffbeb",
-      ded:"Full time M4–M6",
-      segs:[{s:4,e:6,ft:true}],
+      ded:"Full time M2–M5 · Part time M6",
+      segs:[{s:2,e:5,ft:true},{s:6,e:6,ft:false}],
       resp:["Testes end-to-end todos os sistemas","Testes de carga e offline","Validação de geofence e map","Aprovação para go-live"] },
   ];
 
@@ -880,7 +889,7 @@ function Equipe() {
           { l:"Pessoas no time",  v:"7",       s:"Papéis distintos e complementares", acc:"#1e3a5f" },
           { l:"Período",          v:"8 meses",  s:"M1–M6 dev/homolog · M7–M8 IA",      acc:"#7c3aed" },
           { l:"IA embarcada",     v:"M1–M8",   s:"Cientista de dados full time",       acc:"#0891b2" },
-          { l:"Go-live",          v:"M6",      s:"Sistemas em produção · IA continua", acc:"#16a34a" },
+          { l:"Go-live",          v:"M7",      s:"Sistemas em produção · IA continua", acc:"#16a34a" },
         ].map(s => (
           <div key={s.l} className="sc" style={{ "--sc-accent":s.acc }}>
             <div className="sc-l">{s.l}</div><div className="sc-v">{s.v}</div><div className="sc-s">{s.s}</div>
@@ -995,19 +1004,21 @@ function Escopo() {
       <div className="card">
         <div className="ch">
           <span className="ch-t">{TABS.find(t2=>t2.id===tab)?.label}</span>
-          <div style={{ marginLeft:"auto", display:"flex", gap:6 }}>
-            <span className="badge g">Incluído</span>
-            <span className="badge n">Fase 2</span>
-          </div>
         </div>
         <table>
-          <thead><tr><th>Funcionalidade</th><th>Status</th><th>Obs.</th></tr></thead>
+          <thead><tr><th>Funcionalidade</th><th>Obs.</th></tr></thead>
           <tbody>
             {ESCOPO[tab].map(r => (
-              <tr key={r.f}>
-                <td>{r.f}</td>
-                <td><span className={`tag ${r.tag}`}>{r.tag==="inc"?"Incluído":"Fase 2"}</span></td>
-                <td style={{ fontFamily:"var(--mono)", fontSize:11, color:"var(--t3)" }}>{r.obs}</td>
+              <tr key={r.f} style={{ background: r.ia ? "#faf5ff" : undefined }}>
+                <td style={{ borderLeft: r.ia ? "3px solid #7c3aed" : "3px solid transparent" }}>
+                  <div style={{ display:"flex", alignItems:"center", gap:8 }}>
+                    {r.f}
+                    {r.ia && (
+                      <span style={{ display:"inline-flex", alignItems:"center", fontSize:9, fontWeight:700, padding:"1px 6px", borderRadius:10, background:"#f5f3ff", color:"#6d28d9", border:"1px solid #ddd6fe", fontFamily:"var(--mono)", flexShrink:0, letterSpacing:".03em" }}>IA</span>
+                    )}
+                  </div>
+                </td>
+                <td style={{ fontFamily:"var(--mono)", fontSize:11, color: r.ia ? "#7c3aed" : "var(--t3)" }}>{r.obs}</td>
               </tr>
             ))}
           </tbody>
