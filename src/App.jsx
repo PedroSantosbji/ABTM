@@ -179,7 +179,7 @@ const RM_GROUPS = [
     features:[
       { name:"Assistente de Voz",                         s:4, e:4, type:"ia" },
       { name:"Análise Automática de Fotos",                s:1, e:6, type:"ia" },
-      { name:"Enriquecimento de base · fotos + labels",    s:1, e:2, type:"ia" },
+      { name:"Enriquecimento de base · fotos + labels",    s:1, e:2, type:"config" },
       { name:"Sugestão de Pedido",                         s:5, e:7, type:"ia" },
       { name:"Resumo Inteligente",                         s:7, e:7, type:"ia" },
       { name:"Sustentação e ajustes de modelos",           s:8, e:8, type:"ia" },
@@ -591,7 +591,7 @@ function IA() {
     <div className="pg">
       <div className="stat-row">
         {[
-          { l:"Features IA",        v:"5",   s:"Desenvolvidas M1–M8 pelo cientista",  acc:"#7c3aed" },
+          { l:"Features IA",        v:"4",   s:"Desenvolvidas M1–M8 pelo cientista",  acc:"#7c3aed" },
           { l:"Assistente de Voz",  v:"M4",  s:"Pronto no mês 4",                   acc:"#0891b2" },
           { l:"Ciência de Dados",   v:"8m",  s:"Cientista Sênior full time M1–M8",  acc:"#0891b2" },
           { l:"Sustentação IA",     v:"M8",  s:"Ajustes e homologação final",        acc:"#7c3aed" },
@@ -615,17 +615,14 @@ function IA() {
       </div>
       <div className="card">
         <div className="ch"><span className="ch-t">Funcionalidades de IA · MVP</span></div>
-        <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr 1fr", gap:"1px", background:"var(--bd)" }}>
+        <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"1px", background:"var(--bd)" }}>
           {[
             { name:"Assistente de Voz",          where:"App Promotor",           badge:"cy", month:"M4",
-              desc:"O promotor registra observações por voz durante a execução no PDV. O sistema transcreve automaticamente, reduzindo cliques e acelerando o preenchimento em campo.",
+              desc:"Leitor de voz integrado ao app: o promotor fala e o campo é preenchido automaticamente. Um diferencial direto na experiência em campo — sem digitar, sem parar o que está fazendo.",
               use:["Observações de diagnóstico do PDV","Registro de rupturas identificadas","Notas durante a reposição","Comunicação rápida com supervisor"] },
             { name:"Análise Automática de Fotos", where:"App · Retaguarda",       badge:"p",  month:"M1–M6",
               desc:"O sistema analisa automaticamente as fotos capturadas pelo promotor no PDV, identificando problemas de exposição, rupturas e desvios de planograma sem intervenção manual.",
               use:["Detecção de ruptura por imagem","Análise de posicionamento de produto","Conformidade com planograma","Alertas visuais automáticos para o supervisor"] },
-            { name:"Enriquecimento de Base",      where:"Backend · Dados",        badge:"p",  month:"M1–M2",
-              desc:"Construção de uma base de dados rica com fotos dos produtos, labels e metadados, que alimenta os modelos de análise visual e melhora a precisão ao longo do tempo.",
-              use:["Cadastro visual de produtos com labels","Treinamento contínuo dos modelos","Base de referência para análise de gôndola","Exportação para relatórios visuais"] },
             { name:"Sugestão de Pedido",          where:"App Promotor",           badge:"cy", month:"M5–M7",
               desc:"Com base no histórico de vendas, ruptura identificada e nível de estoque, o sistema sugere automaticamente os produtos e quantidades a repor em cada PDV.",
               use:["Sugestão por corredor e categoria","Baseada em histórico e sazonalidade","Redução de rupturas por falta de pedido","Aprovação rápida pelo promotor"] },
@@ -833,7 +830,7 @@ function Equipe() {
     { role:"Cientista de Dados Sênior", init:"CD", color:"#0891b2", bg:"#ecfeff",
       ded:"Full time M1–M8",
       segs:[{s:1,e:8,ft:true}],
-      resp:["Enriquecimento de base (M1–M2)","Análise automática de fotos (M1–M6)","Assistente de Voz (M4)","Sugestão de pedido (M5–M7)","Resumo inteligente (M7) · Sustentação M8"] },
+      resp:["Análise automática de fotos (M1–M6)","Assistente de Voz · speech-to-text (M4)","Sugestão de pedido (M5–M7)","Resumo inteligente (M7) · Sustentação M8"] },
     { role:"QA / Testes", init:"QA", color:"#b45309", bg:"#fffbeb",
       ded:"Full time M4–M6",
       segs:[{s:4,e:6,ft:true}],
