@@ -263,7 +263,7 @@ html,body{height:100%;overflow:hidden}
 .two{display:grid;grid-template-columns:1fr 280px;gap:14px;align-items:start}
 
 /* ── STAT CARDS ── */
-.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 .sc{background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:16px 18px;box-shadow:var(--sh);position:relative;overflow:hidden}
 .sc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--sc-accent,var(--blm))}
 .sc-l{font-size:11px;color:var(--t3);margin-bottom:6px;font-weight:500;text-transform:uppercase;letter-spacing:.05em}
@@ -504,7 +504,6 @@ function Overview() {
         {[
           { l:"Sistemas",         v:"3",       s:"Retaguarda · App · Portal",   acc:"#2563eb" },
           { l:"Prazo total",      v:"8 meses", s:"6m dev/homolog + 2m IA avançada",  acc:"#7c3aed" },
-          { l:"Horas c/ margem",  v:"2.411h",  s:"25% margem de segurança",    acc:"#0891b2" },
           { l:"Perfis de acesso", v:"6",       s:"AD · ST · SM · SO · CL · PV", acc:"#166534" },
         ].map(s => (
           <div key={s.l} className="sc" style={{ "--sc-accent":s.acc }}>
@@ -854,9 +853,9 @@ function Equipe() {
       segs:[{s:1,e:8,ft:true}],
       resp:["Análise automática de fotos (M1–M6)","Assistente de Voz · speech-to-text (M4)","Sugestão de pedido (M5–M7)","Resumo inteligente (M7) · Sustentação M8"] },
     { role:"Engenheiro de Dados / Backend", init:"ED", color:"#0f766e", bg:"#f0fdfa",
-      ded:"Full time M1–M3",
-      segs:[{s:1,e:3,ft:true}],
-      resp:["Estruturação do pipeline de dados","Modelagem e enriquecimento da base","Integração com os modelos de IA","Fundação de dados para análise de fotos"] },
+      ded:"Full time M3–M6",
+      segs:[{s:3,e:6,ft:true}],
+      resp:["Migração dos dados do Prime (M3–M6)"] },
     { role:"QA / Testes", init:"QA", color:"#b45309", bg:"#fffbeb",
       ded:"Full time M4–M6",
       segs:[{s:4,e:6,ft:true}],
