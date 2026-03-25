@@ -815,8 +815,8 @@ function Equipe() {
   const TOTAL_M = 6;
   const TEAM = [
     { role:"Product Designer Sênior", init:"DS", color:"#7c3aed", bg:"#f5f3ff",
-      ded:"Full time M1–M3 · Part time M4",
-      segs:[{s:1,e:3,ft:true},{s:4,e:4,ft:false}],
+      ded:"Full time M1–M3 · Part time M4–M6",
+      segs:[{s:1,e:3,ft:true},{s:4,e:6,ft:false}],
       resp:["Design system e componentes","Wireframes e protótipos Figma","Telas App (React Native)","Telas web Retaguarda e Portal","Handoff técnico para devs"] },
     { role:"Backend Sênior", init:"BE", color:"#1e3a5f", bg:"#eff6ff",
       ded:"Full time M1–M4 · Part time M5–M6",
@@ -1002,9 +1002,104 @@ const PAGES = {
 };
 
 export default function App() {
+  const [auth, setAuth] = useState(false);
+  const [pw, setPw] = useState("");
+  const [err, setErr] = useState(false);
+  const [shake, setShake] = useState(false);
+
   const [active, setActive] = useState("overview");
   const Page = PAGES[active];
   const [title, sub] = TITLES[active];
+
+  function handleLogin(e) {
+    if (e && e.preventDefault) e.preventDefault();
+    if (pw === "abtm_e_guidance") {
+      setAuth(true);
+      setErr(false);
+    } else {
+      setErr(true);
+      setShake(true);
+      setPw("");
+      setTimeout(() => setShake(false), 500);
+    }
+  }
+
+  if (!auth) {
+    return (
+      <div style={{ height:"100vh", display:"flex", alignItems:"center", justifyContent:"center",
+        background:"linear-gradient(135deg,#0f172a 0%,#1e3a5f 60%,#1e40af 100%)",
+        fontFamily:"'Inter',system-ui,sans-serif" }}>
+        <style>{S}</style>
+        <style>{`
+          @keyframes shake {
+            0%,100%{transform:translateX(0)}
+            20%{transform:translateX(-8px)}
+            40%{transform:translateX(8px)}
+            60%{transform:translateX(-6px)}
+            80%{transform:translateX(6px)}
+          }
+          @keyframes loginFadeIn {
+            from{opacity:0;transform:translateY(20px)}
+            to{opacity:1;transform:translateY(0)}
+          }
+          .login-card{animation:loginFadeIn .4s ease both}
+          .login-card.shake{animation:shake .5s ease both}
+          .login-input{width:100%;padding:11px 14px;border-radius:8px;border:1.5px solid #334155;background:#0f172a;color:#f1f5f9;font-size:14px;font-family:'JetBrains Mono',monospace;outline:none;transition:border .15s;letter-spacing:.05em}
+          .login-input:focus{border-color:#2563eb;box-shadow:0 0 0 3px rgba(37,99,235,.2)}
+          .login-input.error{border-color:#ef4444;box-shadow:0 0 0 3px rgba(239,68,68,.15)}
+          .login-input::placeholder{color:#475569;letter-spacing:0}
+          .login-btn{width:100%;padding:11px;border-radius:8px;border:none;background:linear-gradient(135deg,#2563eb,#1d4ed8);color:#fff;font-size:13.5px;font-weight:600;cursor:pointer;transition:opacity .15s;font-family:'Inter',system-ui,sans-serif;letter-spacing:-.01em}
+          .login-btn:hover{opacity:.9}
+          .login-btn:active{opacity:.8}
+        `}</style>
+        <div className={`login-card${shake?" shake":""}`}
+          style={{ background:"rgba(15,23,42,.85)", backdropFilter:"blur(20px)", border:"1px solid rgba(255,255,255,.08)",
+            borderRadius:16, padding:"40px 36px", width:380, boxShadow:"0 24px 64px rgba(0,0,0,.5)" }}>
+
+          {/* Logo */}
+          <div style={{ display:"flex", alignItems:"center", gap:12, marginBottom:32 }}>
+            <div style={{ width:40, height:40, borderRadius:10, background:"linear-gradient(135deg,#1e3a5f,#2563eb)",
+              display:"flex", alignItems:"center", justifyContent:"center", fontSize:18, fontWeight:800,
+              color:"#fff", boxShadow:"0 4px 14px rgba(37,99,235,.4)" }}>G</div>
+            <div>
+              <div style={{ fontSize:16, fontWeight:700, color:"#f1f5f9", letterSpacing:"-.02em" }}>Guidance</div>
+              <div style={{ fontSize:11, color:"#64748b", fontFamily:"'JetBrains Mono',monospace" }}>Proposta comercial · Confidencial</div>
+            </div>
+          </div>
+
+          <div style={{ marginBottom:8, fontSize:20, fontWeight:700, color:"#f1f5f9", letterSpacing:"-.02em" }}>
+            Acesso restrito
+          </div>
+          <div style={{ marginBottom:28, fontSize:13, color:"#64748b", lineHeight:1.6 }}>
+            Este documento é confidencial. Insira a senha de acesso para continuar.
+          </div>
+
+          <div style={{ display:"flex", flexDirection:"column", gap:12 }}>
+            <input
+              className={`login-input${err?" error":""}`}
+              type="password"
+              placeholder="Senha de acesso"
+              value={pw}
+              onChange={e => { setPw(e.target.value); setErr(false); }}
+              onKeyDown={e => e.key === "Enter" && handleLogin(e)}
+              autoFocus
+            />
+            {err && (
+              <div style={{ fontSize:12, color:"#f87171", display:"flex", alignItems:"center", gap:5 }}>
+                <span>✕</span> Senha incorreta. Tente novamente.
+              </div>
+            )}
+            <button className="login-btn" onClick={handleLogin}>Entrar →</button>
+          </div>
+
+          <div style={{ marginTop:28, paddingTop:20, borderTop:"1px solid rgba(255,255,255,.06)",
+            fontSize:11, color:"#334155", textAlign:"center", fontFamily:"'JetBrains Mono',monospace" }}>
+            ABTM + GUIDANCE · {new Date().getFullYear()}
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="root">
