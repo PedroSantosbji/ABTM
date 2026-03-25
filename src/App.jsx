@@ -563,24 +563,6 @@ function Overview() {
               </div>
             ))}
           </div>
-          <div className="card">
-            <div className="ch"><span className="ch-t">Diferenciais</span></div>
-            {[
-              { l:"Portal do Cliente",  d:"Visibilidade indústria em real-time", cls:"g" },
-              { l:"Offline-First",      d:"App funciona sem internet",           cls:"g" },
-              { l:"Live Map",           d:"Promotores em tempo real",            cls:"b" },
-              { l:"IA Embarcada",       d:"Assistente de voz, análise de fotos, sugestão de pedido, resumo inteligente", cls:"p" },
-              { l:"Migração Assistida", d:"Prime → novo sistema guiado",         cls:"n" },
-            ].map(d => (
-              <div key={d.l} className="lr" style={{ cursor:"default" }}>
-                <div style={{ flex:1 }}>
-                  <div style={{ fontSize:12.5, fontWeight:600 }}>{d.l}</div>
-                  <div style={{ fontSize:11, color:"var(--t3)" }}>{d.d}</div>
-                </div>
-                <span className={`badge ${d.cls}`}>Diferencial</span>
-              </div>
-            ))}
-          </div>
         </div>
       </div>
     </div>
