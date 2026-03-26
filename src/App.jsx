@@ -132,7 +132,7 @@ const RM_MONTH_META = [
   { label:"M2", bg:"#fff1f2", headerColor:"#e11d48", phase:"Desenvolvimento" },
   { label:"M3", bg:"#ecfdf5", headerColor:"#059669", phase:"Dev + Migração inicia" },
   { label:"M4", bg:"#ecfdf5", headerColor:"#059669", phase:"Dev + Migração" },
-  { label:"M5", bg:"#fffbeb", headerColor:"#d97706", phase:"Homologação + Migração" },
+  { label:"M5", bg:"#fffbeb", headerColor:"#d97706", phase:"Dev + Homolog + Migração" },
   { label:"M6", bg:"#fffbeb", headerColor:"#d97706", phase:"Homologação + Migração" },
   { label:"M7", bg:"#f5f3ff", headerColor:"#7c3aed", phase:"Go-live + IA" },
   { label:"M8", bg:"#f0fdf4", headerColor:"#059669", phase:"Sustentação · IA" },
@@ -393,7 +393,7 @@ const TITLES = {
   overview:   ["Visão Geral",    "Guidance · Programa Feedback"],
   arquitetura:["Arquitetura",    "Sistemas e fluxos do produto"],
   ia:         ["IA & Automação", "Inteligência integrada ao produto"],
-  roadmap:    ["Roadmap",        "Feature por feature · 8 meses · dev M1–M5 · homolog+migração M5–M7 · IA M7–M8"],
+  roadmap:    ["Roadmap",        "Feature por feature · 8 meses · dev M1–M5 · homolog+migração M5–M6 · IA M7–M8"],
   equipe:     ["Equipe",         "Composição do time e dedicação por mês"],
   escopo:     ["Escopo",          "Funcionalidades por plataforma e perfil"],
 };
@@ -711,7 +711,7 @@ function FeatureBar({ color, s, e, type, months }) {
 function Roadmap() {
   const MILESTONES = [
     { m:"M5",    label:"Dev completo",           desc:"Todas as features desenvolvidas e prontas para QA", color:"#166534" },
-    { m:"M5–M7", label:"Homologação + Migração", desc:"QA de todos os sistemas + migração do Prime concluída", color:"#d97706" },
+    { m:"M5–M6", label:"Homologação + Migração", desc:"QA de todos os sistemas + migração do Prime concluída", color:"#d97706" },
     { m:"M7",    label:"Go-live",                desc:"Todos os sistemas em produção", color:"#16a34a" },
     { m:"M7–M8", label:"IA Avançada + Sustentação", desc:"Sugestão de pedido, resumo inteligente, ajustes finais", color:"#7c3aed" },
   ];
@@ -744,7 +744,7 @@ function Roadmap() {
 
       {/* Legend */}
       <div className="card">
-        <div className="ch"><span className="ch-t">Legenda</span><span className="ch-s">8 meses · dev M1–M5 · homolog+migração M5–M7 · IA avançada M7–M8</span></div>
+        <div className="ch"><span className="ch-t">Legenda</span><span className="ch-s">8 meses · dev M1–M5 · homolog+migração M5–M6 · IA avançada M7–M8</span></div>
         <div style={{ padding:"12px 16px", display:"flex", gap:20, flexWrap:"wrap", alignItems:"center" }}>
           {[
             { color:"#1e3a5f", label:"Retaguarda" },
@@ -859,7 +859,7 @@ function Equipe() {
     { label:"M2", bg:"#fff1f2", color:"#e11d48", phase:"Desenvolvimento" },
     { label:"M3", bg:"#ecfdf5", color:"#059669", phase:"Dev + Migração inicia" },
     { label:"M4", bg:"#ecfdf5", color:"#059669", phase:"Dev + Migração" },
-    { label:"M5", bg:"#fffbeb", color:"#d97706", phase:"Homologação + Migração" },
+    { label:"M5", bg:"#fffbeb", color:"#d97706", phase:"Dev+Migra+Homolog" },
     { label:"M6", bg:"#fffbeb", color:"#d97706", phase:"Homologação + Migração" },
     { label:"M7", bg:"#f5f3ff", color:"#7c3aed", phase:"Go-live + IA" },
     { label:"M8", bg:"#f0fdf4", color:"#059669", phase:"Sustentação · IA" },
@@ -890,7 +890,7 @@ function Equipe() {
               {mMeta.map((m,i) => (
                 <th key={i} style={{ textAlign:"center", background:m.bg, color:m.color, fontFamily:"var(--mono)", fontSize:12, fontWeight:700, borderLeft:"1px solid var(--bd)", verticalAlign:"middle" }}>
                   <div>{m.label}</div>
-                  <div style={{ fontSize:8, fontWeight:500, color:m.color, opacity:.7, whiteSpace:"nowrap", overflow:"hidden", maxWidth:60, margin:"2px auto 0" }}>{m.phase}</div>
+                  <div style={{ fontSize:8, fontWeight:500, color:m.color, opacity:.7, whiteSpace:"normal", lineHeight:1.3, margin:"2px auto 0", maxWidth:72, textAlign:"center" }}>{m.phase}</div>
                 </th>
               ))}
             </tr>
